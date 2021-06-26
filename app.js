@@ -12,6 +12,7 @@ app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
+
 // setting the spotify-api goes here:
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
@@ -47,7 +48,16 @@ app.get('/artist-search', (req, res) => {
         .catch(err => console.log('The error while searching artists occurred: ', err));
 })
 
-
+app.get('/albums/:artistId', (req, res) => {
+    spotifyApi
+    .getArtistAlbums(req.params.artistId)
+      .then(data=> {
+        const foundAlbums = data.body.artists.items
+        res.render('albums', { foundAlbums});
+      })
+      
+      .catch(err=> console.log('The error while searching albums occurred: ', err));
+ })
 
 
 /*app.all('/beers', (req, res) => {
