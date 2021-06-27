@@ -60,6 +60,16 @@ app.get('/albums/:artistId', (req, res) => {
  })
 
 
+ app.get('/tracks/:id', (req, res) => {
+  spotifyApi
+  .getAlbumTracks(req.params.id)
+  .then((data) => {
+      console.log('tracks', data.body);
+      res.render("tracks", {albumsTracksArr: data.body.items})
+  })
+  .catch(err => console.log('The error while searching albums occurred: ', err));
+})
+
 /*app.all('/beers', (req, res) => {
 	punkAPI
 		.getBeers()
