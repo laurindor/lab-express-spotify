@@ -52,7 +52,7 @@ app.get('/albums/:artistId', (req, res) => {
     spotifyApi
     .getArtistAlbums(req.params.artistId)
       .then(data=> {
-        const foundAlbums = data.body.artists.items
+        const foundAlbums = data.body.items
         res.render('albums', { foundAlbums});
       })
       
@@ -64,8 +64,9 @@ app.get('/albums/:artistId', (req, res) => {
   spotifyApi
   .getAlbumTracks(req.params.id)
   .then((data) => {
+    const albumsTracks = data.body.items
       console.log('tracks', data.body);
-      res.render("tracks", {albumsTracksArr: data.body.items})
+      res.render('tracks', {albumsTracks})
   })
   .catch(err => console.log('The error while searching albums occurred: ', err));
 })

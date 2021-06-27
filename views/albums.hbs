@@ -1,6 +1,6 @@
 {{#each foundAlbums}}
     <p>{{name}}</p>
-    <img src={{image}}></img>
-     <button> <a href="/views/tracks.hbs">View Tracks</a></button>
+    <img src={{images.[1].url}} alt="">
+     <button> <a href="/tracks/{{id}}">View Tracks</a></button>
 
 {{/each}}
